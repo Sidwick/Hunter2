@@ -35,58 +35,46 @@ var onload = function () {
 
 };
 
-var createSkybox = function() {
-    // The box creation
-    var skybox = BABYLON.Mesh.CreateSphere("skyBox", 100, 1000, scene);
-
-    // The sky creation
-    BABYLON.Engine.ShadersRepository = "shaders/";
-
-    var shader = new BABYLON.ShaderMaterial("gradient", scene, "gradient", {});
-    shader.setFloat("offset", 10);
-    shader.setColor3("topColor", BABYLON.Color3.FromInts(0,119,255));
-    shader.setColor3("bottomColor", BABYLON.Color3.FromInts(240,240, 255));
-
-    shader.backFaceCulling = false;
-
-    // box + sky = skybox !
-    skybox.material = shader;
-};
-
 var initScene = function() {
     scene = new BABYLON.Scene(engine);
 
     // Update the scene background color
-    scene.clearColor=new BABYLON.Color3(0.8,0.8,0.8);
+    //scene.clearColor=new BABYLON.Color3(0.8,0.8,0.8);
 
     scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
-    scene.fogDensity = 0.003;
-    scene.fogColor = new BABYLON.Color3(0.8,0.83,0.8);
+    scene.fogDensity = 0.0005;
+    scene.fogColor = new BABYLON.Color3(0.15,0.2,0.15);
 
     // Camera attached to the canvas
     //var camera = new BABYLON.ArcRotateCamera("Camera", 0.67,1.2, 150, BABYLON.Vector3.Zero(), scene);
     // Add a camera to the scene and attach it to the canvas
-    var camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(10, 1, -10), scene);
+    var camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(10, 2, -10), scene);
     // Target the camera to scene origin.
     camera.setTarget(new BABYLON.Vector3(0,3,0));
 
     camera.attachControl(canvas,true);
     // Ally Gravity
+    scene.gravity = new BABYLON.Vector3(0, -9.81, 0);
     camera.applyGravity = true;
 
     // Hemispheric light to light the scene
-    var h = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0, 1, -1), scene);
+    var h = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(10, 1, -10), scene);
+    h.intensity = 0.6;
+
     
-    var d1 = new BABYLON.DirectionalLight("dir", new BABYLON.Vector3(1, -1, -2), scene);
-    d1.position = new BABYLON.Vector3(-300,300,600);
+    var d1 = new BABYLON.DirectionalLight("dir", new BABYLON.Vector3(0, -1000, 0), scene);
+    d1.position = new BABYLON.Vector3(1000,1000,1000);
+    d1.intensity = 0.6;
     var shadowGenerator = new BABYLON.ShadowGenerator(2048, d1);
 
     createSkybox();
 
     var ground = BABYLON.Mesh.CreateGround("ground", 1000, 1000, 1, scene);
+    var grassTexture = new BABYLON.GrassProceduralTexture("groundgrass", 1028, scene);
     ground.material = new BABYLON.StandardMaterial("ground", scene);
-    ground.      material.diffuseColor = BABYLON.Color3.FromInts(193, 181, 151);
+    ground.material.diffuseColor = BABYLON.Color3.FromInts(193, 181, 151);
     ground.material.specularColor = BABYLON.Color3.Black();
+    ground.material.ambientTexture = grassTexture;
 
     ground.receiveShadows = true;
 
