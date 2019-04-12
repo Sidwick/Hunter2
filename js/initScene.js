@@ -39,11 +39,11 @@ var initScene = function() {
     scene = new BABYLON.Scene(engine);
 
     // Update the scene background color
-    scene.clearColor=new BABYLON.Color3(0.8,0.8,0.8);
+    scene.clearColor=new BABYLON.Color3(0.98,0.98,1);
 
     scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
     scene.fogDensity = 0.0005;
-    scene.fogColor = new BABYLON.Color3(0.15,0.2,0.15);
+    scene.fogColor = new BABYLON.Color3(0.15,0.2,0.25);
 
     // Camera attached to the canvas
     //var camera = new BABYLON.ArcRotateCamera("Camera", 0.67,1.2, 150, BABYLON.Vector3.Zero(), scene);
@@ -72,7 +72,7 @@ var initScene = function() {
     var ground = BABYLON.Mesh.CreateGround("ground", 1000, 1000, 1, scene);
     //var grassTexture = new BABYLON.GrassProceduralTexture("groundgrass", 1028, scene);
     ground.material = new BABYLON.StandardMaterial("ground", scene);
-    ground.material.diffuseColor = BABYLON.Color3.FromInts(193, 181, 151);
+    ground.material.diffuseColor = BABYLON.Color3.FromInts(10, 65, 15);
     ground.material.specularColor = BABYLON.Color3.Black();
     //ground.material.ambientTexture = grassTexture;
 
@@ -95,5 +95,6 @@ var initScene = function() {
     var keyboardControls = controlsKeyboards(scene,camera);
     var tree = new QuickTreeGenerator(10, 10, 3, trunkmat, branchmat, scene,-50,50);
     tree.checkCollisions = true;
+
 
 };
