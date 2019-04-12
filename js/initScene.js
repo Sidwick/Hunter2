@@ -39,7 +39,7 @@ var initScene = function() {
     scene = new BABYLON.Scene(engine);
 
     // Update the scene background color
-    scene.clearColor=new BABYLON.Color3(0.98,0.98,1);
+    scene.clearColor=new BABYLON.Color3(0.94,0.95,1);
 
     scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
     scene.fogDensity = 0.0005;
