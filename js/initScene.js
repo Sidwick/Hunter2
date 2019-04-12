@@ -70,11 +70,11 @@ var initScene = function() {
     //createSkybox();
 
     var ground = BABYLON.Mesh.CreateGround("ground", 1000, 1000, 1, scene);
-    var grassTexture = new BABYLON.GrassProceduralTexture("groundgrass", 1028, scene);
+    //var grassTexture = new BABYLON.GrassProceduralTexture("groundgrass", 1028, scene);
     ground.material = new BABYLON.StandardMaterial("ground", scene);
     ground.material.diffuseColor = BABYLON.Color3.FromInts(193, 181, 151);
     ground.material.specularColor = BABYLON.Color3.Black();
-    ground.material.ambientTexture = grassTexture;
+    //ground.material.ambientTexture = grassTexture;
 
     ground.receiveShadows = true;
 
@@ -95,39 +95,5 @@ var initScene = function() {
     var keyboardControls = controlsKeyboards(scene,camera);
     var tree = new QuickTreeGenerator(10, 10, 3, trunkmat, branchmat, scene,-50,50);
     tree.checkCollisions = true;
-    //var tg = new TreeGenerator(scene, shadowGenerator);
-    //initGui(tg);
-
-};
-
-var initGui = function(tg) {
-
-    var gui = new dat.GUI();
-    gui.add(tg, 'treeNumber', 1, 200).name("Number of trees").step(1).onChange(function(){
-        tg.generate();
-    });
-    var f1 = gui.addFolder('Branch');
-    f1.open();
-    f1.add(tg, 'minSizeBranch', 1, 50).name("Min size").step(0.5).onChange(function(){
-        tg.generate();
-    });
-    f1.add(tg, 'maxSizeBranch', 1, 50).name("Max size").step(0.5).onChange(function(){
-        tg.generate();
-    });
-
-    f1 = gui.addFolder('Trunk');
-    f1.open();
-    f1.add(tg, 'minSizeTrunk', 1, 50).name("Min size").step(0.5).onChange(function(){
-        tg.generate();
-    });
-    f1.add(tg, 'maxSizeTrunk', 1, 50).name("Max size").step(0.5).onChange(function(){
-        tg.generate();
-    });
-    f1.add(tg, 'minRadius', 1, 10).name("Min radius").step(0.5).onChange(function(){
-        tg.generate();
-    });
-    f1.add(tg, 'maxRadius', 1, 10).name("Max radius").step(0.5).onChange(function(){
-        tg.generate();
-    });
 
 };
