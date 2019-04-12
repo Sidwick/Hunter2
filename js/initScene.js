@@ -70,26 +70,9 @@ var initScene = function() {
     // Target the camera to scene origin.
     camera.setTarget(new BABYLON.Vector3(0,3,0));
 
-    camera.attachControl(canvas);
+    camera.attachControl(canvas,true);
     // Ally Gravity
     camera.applyGravity = true;
-    // Keyboard Bindings
-    camera.keysUp.push(87);    //W
-    camera.keysDown.push(83)   //D
-    camera.keysLeft.push(65);  //A
-    camera.keysRight.push(68); //S
-
-
-    scene.actionManager = new BABYLON.ActionManager(scene);
-    scene.actionManager.registerAction(
-        new BABYLON.ExecuteCodeAction(
-            {
-                trigger: BABYLON.ActionManager.OnKeyUpTrigger,
-                parameter: ' '
-            },
-            function () { console.log('(spacebra) button was pressed'); }
-        )
-);
 
     // Hemispheric light to light the scene
     var h = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0, 1, -1), scene);
@@ -121,13 +104,12 @@ var initScene = function() {
     branchmat.diffuseColor = BABYLON.Color3.FromInts(branchColor[0],branchColor[1],branchColor[2]);
     branchmat.specularColor = BABYLON.Color3.Black();
     
+    var keyboardControls = controlsKeyboards(scene,camera);
     var tree = new QuickTreeGenerator(10, 10, 3, trunkmat, branchmat, scene,-50,50);
     tree.checkCollisions = true;
     //var tg = new TreeGenerator(scene, shadowGenerator);
     //initGui(tg);
 
-    console.log(tree);
-    console.log(ground);
 };
 
 var initGui = function(tg) {
