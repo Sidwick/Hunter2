@@ -67,7 +67,7 @@ var initScene = function() {
     d1.intensity = 0.6;
     var shadowGenerator = new BABYLON.ShadowGenerator(2048, d1);
 
-    createSkybox();
+    //createSkybox();
 
     var ground = BABYLON.Mesh.CreateGround("ground", 1000, 1000, 1, scene);
     var grassTexture = new BABYLON.GrassProceduralTexture("groundgrass", 1028, scene);
